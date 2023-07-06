@@ -1,4 +1,4 @@
-import MainLayout from '@/layout/MainLayout'
+import MainLayout from '@layout/MainLayout'
 import '@/styles/tailwind.css'
 
 export default function App({ Component, pageProps }) {
