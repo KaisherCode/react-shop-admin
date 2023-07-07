@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import { addProduct } from "@services/api/products";
 
 export default function FormProduct() {
     const formRef = useRef(null)
@@ -12,7 +13,9 @@ export default function FormProduct() {
             categoryId: parseInt(formData.get('category')),
             images: [formData.get('images').name],
         }
-        console.log(data)
+        addProduct(data).then((response)=>{
+            console.log(response)
+        })
     }
     return (
         <form ref={formRef} onSubmit={handleSubmit}>
@@ -78,6 +81,7 @@ export default function FormProduct() {
                                 Description
                             </label>
                             <textarea
+                            required
                                 name="description"
                                 id="description"
                                 autoComplete="description"
@@ -113,6 +117,7 @@ export default function FormProduct() {
                                             >
                                                 <span>Upload a file</span>
                                                 <input
+                                                required
                                                     id="images"
                                                     name="images"
                                                     type="file"
