@@ -1,8 +1,9 @@
 import { useRef } from "react";
 import { addProduct } from "@services/api/products";
 
-export default function FormProduct({setOpen, setAlert}) {
+export default function FormProduct({setOpen, setAlert,product}) {
     const formRef = useRef(null)
+    //console.log(product)
     const handleSubmit = (event) => {
         event.preventDefault()
         const formData = new FormData(formRef.current)
@@ -44,7 +45,7 @@ export default function FormProduct({setOpen, setAlert}) {
                             >
                                 Title
                             </label>
-                            <input
+                            <input defaultValue={product?.title}
                                 required
                                 type="text"
                                 name="title"
@@ -59,7 +60,7 @@ export default function FormProduct({setOpen, setAlert}) {
                             >
                                 Price
                             </label>
-                            <input
+                            <input defaultValue={product?.price}
                                 required
                                 type="number"
                                 name="price"
@@ -74,7 +75,7 @@ export default function FormProduct({setOpen, setAlert}) {
                             >
                                 Category
                             </label>
-                            <select
+                            <select defaultValue={product?.category}
                                 id="category"
                                 name="category"
                                 autoComplete="category-name"
@@ -96,7 +97,7 @@ export default function FormProduct({setOpen, setAlert}) {
                             >
                                 Description
                             </label>
-                            <textarea
+                            <textarea defaultValue={product?.description}
                                 required
                                 name="description"
                                 id="description"
@@ -132,7 +133,7 @@ export default function FormProduct({setOpen, setAlert}) {
                                                 className="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
                                             >
                                                 <span>Upload a file</span>
-                                                <input
+                                                <input defaultValue={product?.images}
                                                     required
                                                     id="images"
                                                     name="images"
