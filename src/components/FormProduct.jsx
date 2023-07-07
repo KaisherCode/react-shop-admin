@@ -2,7 +2,7 @@ import { useRef } from "react";
 
 export default function FormProduct() {
     const formRef = useRef(null)
-    const handleSubmit = (event)=>{
+    const handleSubmit = (event) => {
         event.preventDefault()
         const formData = new FormData(formRef.current)
         const data = {
@@ -10,7 +10,7 @@ export default function FormProduct() {
             price: parseInt(formData.get('price')),
             description: formData.get('description'),
             categoryId: parseInt(formData.get('category')),
-            images:[formData.get('images').name],
+            images: [formData.get('images').name],
         }
         console.log(data)
     }
@@ -27,6 +27,7 @@ export default function FormProduct() {
                                 Title
                             </label>
                             <input
+                                required
                                 type="text"
                                 name="title"
                                 id="title"
@@ -41,6 +42,7 @@ export default function FormProduct() {
                                 Price
                             </label>
                             <input
+                                required
                                 type="number"
                                 name="price"
                                 id="price"
