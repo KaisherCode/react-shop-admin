@@ -1,8 +1,17 @@
 import { useRef } from "react";
+import * as Joi from 'joi';
+
+const ProductShema = Joi.object({
+    title: Joi.string().min(5).required(),
+    price: Joi.number().integer().greater(0).precision(0).required(),
+    categoryId: Joi.number().valid(1, 2, 3, 4, 5).required(),
+    description: Joi.string().required(),
+    images: Joi.array().items(Joi.string().pattern(new RegExp('/^.+.(jpg|jpeg|png)$/g'))),
+})
 
 export default function FormProduct() {
     const formRef = useRef(null)
-    const handleSubmit = (event)=>{
+    const handleSubmit = (event) => {
         event.preventDefault()
         const formData = new FormData(formRef.current)
         const data = {
@@ -10,9 +19,11 @@ export default function FormProduct() {
             price: parseInt(formData.get('price')),
             description: formData.get('description'),
             categoryId: parseInt(formData.get('category')),
-            images:[formData.get('images').name],
+            images: [formData.get('images').name],
         }
-        console.log(data)
+        const {error,value}=ProductShema.validate(data)
+        console.log(value)
+        console.log(error)
     }
     return (
         <form ref={formRef} onSubmit={handleSubmit}>
@@ -27,6 +38,7 @@ export default function FormProduct() {
                                 Title
                             </label>
                             <input
+                                required
                                 type="text"
                                 name="title"
                                 id="title"
@@ -41,6 +53,7 @@ export default function FormProduct() {
                                 Price
                             </label>
                             <input
+                                required
                                 type="number"
                                 name="price"
                                 id="price"
