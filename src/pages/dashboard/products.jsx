@@ -22,7 +22,7 @@ export default function Products() {
         } catch {
             console.log(error)
         }
-    }, [])
+    }, [alert])
 
     return (
         <>
